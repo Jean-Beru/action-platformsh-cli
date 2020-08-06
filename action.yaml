@@ -1,0 +1,17 @@
+name: 'Platform.sh CLI'
+description: 'Run platform.sh CLI commands'
+branding:
+  icon: 'terminal'
+  color: 'gray-dark'
+inputs:
+  command:
+    description: 'Command to run'
+    default: 'list'
+outputs:
+  return:
+    description: 'Command result'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
