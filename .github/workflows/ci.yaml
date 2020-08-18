@@ -1,4 +1,4 @@
-name: PR title
+name: CI
 
 on:
   pull_request:
@@ -14,13 +14,16 @@ jobs:
         uses: ./
         id: version
         with:
-          token: abc
-          project: def
+          token: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
+          project: ${{ secrets.PLATFORMSH_PROJECT }}
           command: --version
       - name: Check version
+        env:
+          current: ${{ steps.version.outputs.result }}
+          expected: "Platform.sh CLI 3.60.4"
         run: |
-          if [ "${{ steps.version.outputs.result }}" -ne "Platform.sh CLI 3.60.4" ]
+          if [ "$current" != "$expected" ]
           then
-            exit 0
+            exit 1
           fi
 
