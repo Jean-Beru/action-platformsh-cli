@@ -1,13 +1,13 @@
 #!/bin/sh -l
 
-# Set API token
-PLATFORMSH_CLI_TOKEN=$1
-
 # Set project
-platform project:set-remote $2
+if [ $1 -ne "" ]
+then
+  platform project:set-remote $1
+fi
 
 # Execute command
-result=`platform $3`
+result=`platform $2`
 
 # Check execution status
 if [ $? -ne 0 ]

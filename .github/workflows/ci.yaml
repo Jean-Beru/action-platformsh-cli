@@ -14,8 +14,6 @@ jobs:
         uses: ./
         id: version
         with:
-          token: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
-          project: ${{ secrets.PLATFORMSH_PROJECT }}
           command: --version
       - name: Check version
         env:

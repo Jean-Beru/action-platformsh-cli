@@ -4,9 +4,6 @@ branding:
   icon: 'terminal'
   color: 'gray-dark'
 inputs:
-  token:
-    description: 'Platform.sh API token'
-    required: true
   project:
     description: 'Platform.sh project ID'
     required: true
@@ -21,6 +18,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.token }}
     - ${{ inputs.project }}
     - ${{ inputs.command }}
