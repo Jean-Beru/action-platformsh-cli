@@ -3,16 +3,18 @@
 ## Description
 
 This action calls [Platform.sh CLI](https://github.com/platformsh/platformsh-cli).
- 
+
+## Environment variables
+
+### `PLATFORMSH_CLI_TOKEN`
+
+**Optional** Your Platform.sh [API token](https://docs.platform.sh/development/cli/api-tokens.html).
+
 ## Inputs
-
-### `token`
-
-**Required** Platform.sh [API token](https://docs.platform.sh/development/cli/api-tokens.html).
 
 ### `project`
 
-**Required** Platform.sh project ID.
+**Optional** Platform.sh project ID.
 
 ### `command`
 
@@ -22,8 +24,9 @@ This action calls [Platform.sh CLI](https://github.com/platformsh/platformsh-cli
 
 ```yaml
 uses: actions/platformsh@v3.60.4
+env:
+  PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
 with:
-  token: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
   project: ${{ secrets.PLATFORMSH_PROJECT }}
   command: 'help'
 ```
