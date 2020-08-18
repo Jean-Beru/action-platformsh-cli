@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Get version
+        uses: ./
+        id: version
+        with:
+          token: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
+          project: ${{ secrets.PLATFORMSH_PROJECT }}
+          command: --version
+      - name: Check version
+        env:
+          current: ${{ steps.version.outputs.result }}
+          expected: "Platform.sh CLI 3.60.4"
+        run: |
+          if [ "$current" != "$expected" ]
+          then
+            exit 1
+          fi
+

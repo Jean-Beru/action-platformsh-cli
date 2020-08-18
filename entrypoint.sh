@@ -1,18 +1,18 @@
 #!/bin/sh -l
 
-# Check API token
-if [ -z $PLATFORMSH_CLI_TOKEN ]
-then
-  echo "::error ::Missing PLATFORMSH_CLI_TOKEN environment variable"
-  exit 1
-fi
+# Set API token
+PLATFORMSH_CLI_TOKEN=$1
 
-# Execute
-result=`platform $1`
+# Set project
+platform project:set-remote $2
 
-# Check command execution status
+# Execute command
+result=`platform $3`
+
+# Check execution status
 if [ $? -ne 0 ]
 then
+  echo "::error ::Command failed"
   exit 1
 fi
 
@@ -22,4 +22,4 @@ result="${result//$'\n'/'%0A'}"
 result="${result//$'\r'/'%0D'}"
 
 # Send output
-echo "::set-output name=return::$result"
+echo "::set-output name=result::$result"
